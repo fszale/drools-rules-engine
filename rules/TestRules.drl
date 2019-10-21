@@ -1,0 +1,61 @@
+package com.rules.test123
+
+import java.time.OffsetTime
+import java.util.Arrays
+import org.slf4j.Logger
+import java.text.DecimalFormat
+import org.slf4j.LoggerFactory
+import java.util.ArrayList
+import java.util.HashSet
+import java.math.BigDecimal
+import java.util.List
+import java.time.OffsetDateTime
+import java.time.LocalDate
+import java.util.Collections
+import java.math.RoundingMode
+
+global String modelId
+global Integer revisionNumber
+global List $allMessages
+global Logger $logger
+
+declare  Input
+    house : House
+end
+
+declare  House
+    bedrooms : BigDecimal
+    sqfootage : BigDecimal
+    message: String
+    id : BigDecimal
+end
+
+rule "init_logger"
+    no-loop true
+    salience 1000
+when
+then
+	drools.getWorkingMemory().setGlobal("$logger", LoggerFactory.getLogger("test-logger"));
+end
+
+rule "check_sqfootage_over1000"
+    no-loop true
+    salience 1
+when
+	$input : Input( house.sqfootage > 1000 )
+then
+	$logger.info('Check_sqfootage_over1000 was invoked');
+	$input.getHouse().setMessage('checked sqfootage');
+	update( $input );
+end
+
+rule "check_sqfootage_under1000"
+    no-loop true
+    salience 1
+when
+	$input : Input( house.sqfootage <= 1000 )
+then
+	$logger.info('Check_sqfootage_under1000 was invoked');
+	$input.getHouse().setMessage('checked sqfootage');
+	update( $input );
+end
