@@ -9,7 +9,7 @@
 	<name>An example project to showcase a rules engine wrapper for Drools.</name>
 	<description>Java based project to jump start rules engine based project development utilizing open source Drools.</description>
     <properties>
-        <runtime.version>7.27.0.Final</runtime.version>
+        <runtime.version>7.60.0.Final</runtime.version>
     </properties>
 	<build>
         <resources>
